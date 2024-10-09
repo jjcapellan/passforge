@@ -1,0 +1,117 @@
+:root {
+    --safe-bottom: env(safe-area-inset-bottom, 20px);
+    --safe-left: env(safe-area-inset-left, 20px);
+    --safe-right: env(safe-area-inset-right, 20px);
+    --safe-top: env(safe-area-inset-top, 20px);
+}
+
+* {
+    box-sizing: border-box;
+    font-kerning: auto;
+    margin: 0;
+    padding: 0;
+    text-rendering: optimizeLegibility;
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+header {
+    color: black;
+    padding: 1rem;
+    text-align: center;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+section {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 3rem;
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 32rem;
+}
+
+form input {
+    border-color: darkgray;
+    border-style: solid;
+    border-width: 2px;
+    font-size: 2rem;
+    height: 3rem;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+}
+
+form input[type="submit"] {
+    background-color: orange;
+    border-color: black;
+    color: black;
+    font-weight: bold;
+    height: unset;
+    padding: 1rem;
+    transition: all 0.5s;
+}
+
+form input[type="submit"]:hover {
+    background-color: black;
+    border-color: orange;
+    color: white;
+}
+
+form input[type="submit"]:active {
+    background-color: white;
+    border-color: black;
+    color: black;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+#info {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+#out {
+    color: grey;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.8s;
+}
+
+@media (max-width: 500px) {
+    section {
+        padding: 1rem;
+    }
+    form {
+        width: inherit;
+    }
+    #out{
+        font-size: 1.5rem;
+        word-wrap:break-word;
+        word-break: break-all;
+    }
+  }
