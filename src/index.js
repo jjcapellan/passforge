@@ -7,7 +7,13 @@ const btForge = document.getElementById("forge");
 btForge.addEventListener("click", btForgeHandler);
 tbIt.addEventListener("input", printTime);
 
-const chars = genChars();
+const lowercaseArr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
+    "s", "t", "u", "v", "w", "x", "y", "z"];
+const uppercaseArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
+    "S", "T", "U", "W", "X", "Y", "Z"];
+const numbersArr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const symbolsArr = ["!", "@", "#", "$", "~", "/", "(", ")", "=", "?", "[", "]", "+", "*", "{", "}", ";", ":",
+    "_", "-", ".", ",", ">", "<"];
 
 let iterationTime = 0;
 let clicked = false;
@@ -31,6 +37,10 @@ async function btForgeHandler(evt) {
     let iterations = tbIt.value;
     let byteArray = await getByteArray(str, iterations);
     let pass = "";
+
+    // Build chars array
+    const chars = [...lowercaseArr, ...numbersArr, ...symbolsArr, ...uppercaseArr];
+
     byteArray.map(v => {
         const num = v.valueOf();
         const maxUtf8Value = 255;
@@ -99,14 +109,4 @@ async function printTime() {
         estTime > 1000 ?
             `${msg}${Math.round(estTime / 1000)}s` :
             `${msg}${Math.round(estTime)}ms`;
-}
-
-
-function genChars() {
-    let arr = [];
-    for (let i = 33; i < 126; i++) {
-        arr.push(String.fromCharCode(i));
-    }
-    // arr.length == 93
-    return arr;
 }
