@@ -2,9 +2,9 @@ const tbIn = document.getElementById("in");
 const tbIt = document.getElementById("iterations");
 const spOut = document.getElementById("out");
 const spInfo = document.getElementById("info");
-const btForge = document.getElementById("forge");
+const form = document.querySelector("form");
 
-btForge.addEventListener("click", btForgeHandler);
+form.addEventListener("submit", submitHandler, false);
 tbIt.addEventListener("input", printTime);
 
 const lowercaseArr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
@@ -21,8 +21,8 @@ let clicked = false;
 printTime();
 
 
-async function btForgeHandler(evt) {
-    evt.preventDefault();
+async function submitHandler(evt) {
+    evt.preventDefault();    
     if (clicked) return;
     clicked = true;
 
@@ -31,10 +31,12 @@ async function btForgeHandler(evt) {
     spOut.style.color = "grey";
     spInfo.innerText = "Progress:";
 
+    // Get form data
+    const data = new FormData(form);
+    let str = data.get("in");
+    let iterations = data.get("iterations");
 
     // Generate password (pass)
-    let str = tbIn.value;
-    let iterations = tbIt.value;
     let byteArray = await getByteArray(str, iterations);
     let pass = "";
 
