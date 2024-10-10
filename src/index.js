@@ -110,3 +110,12 @@ async function printTime() {
             `${msg}${Math.round(estTime / 1000)}s` :
             `${msg}${Math.round(estTime)}ms`;
 }
+
+function mixArr(arr) {
+    const mixed = [];
+    for (let i = 0; i < arr.length - 1; i += 2) {
+        mixed.push(arr[i + 1], arr[i]);
+    }
+    mixed.push(arr[arr.length - 1]);
+    return mixed;
+}
