@@ -3,9 +3,16 @@ const tbIt = document.getElementById("iterations");
 const spOut = document.getElementById("out");
 const spInfo = document.getElementById("info");
 const form = document.querySelector("form");
+const btMinus = document.getElementById("minus");
+const btPlus = document.getElementById("plus");
+const lbRange = document.getElementById("range");
+const rgLength = document.getElementById("len");
 
 form.addEventListener("submit", submitHandler, false);
 tbIt.addEventListener("input", printTime);
+btMinus.addEventListener("click", minusHandler, false);
+btPlus.addEventListener("click", plusHandler, false);
+rgLength.addEventListener("change", rgLengthHandler, false);
 
 const lowercaseArr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
     "s", "t", "u", "v", "w", "x", "y", "z"];
@@ -39,6 +46,7 @@ async function submitHandler(evt) {
     const inclLower = data.get("abc");
     const inclNum = data.get("123");
     const inclSym = data.get("sym");
+    const passLength = data.get("len");
 
     // Generate password (pass)
     let byteArray = await getByteArray(str, iterations);
@@ -57,6 +65,8 @@ async function submitHandler(evt) {
         const idx = Math.round((num * (chars.length - 1)) / maxUtf8Value);
         pass += chars[idx];
     });
+
+    pass = pass.substring(0, passLength);
 
     // Render password
     spOut.innerText = pass;
@@ -119,6 +129,22 @@ async function printTime() {
         estTime > 1000 ?
             `${msg}${Math.round(estTime / 1000)}s` :
             `${msg}${Math.round(estTime)}ms`;
+}
+
+function minusHandler(evt) {
+    evt.preventDefault();
+    rgLength.value--;
+    lbRange.innerText = `Length(${rgLength.value})`;
+}
+
+function plusHandler(evt) {
+    evt.preventDefault();
+    rgLength.value++;
+    lbRange.innerText = `Length(${rgLength.value})`;
+}
+
+function rgLengthHandler(evt) {
+    lbRange.innerText = `Length(${rgLength.value})`;
 }
 
 function mixArr(arr) {

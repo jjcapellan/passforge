@@ -101,6 +101,13 @@ label{
     margin-right: 1rem;
 }
 
+.rangebt {
+    height: 2rem;
+    width: 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
 #info {
     margin-bottom: 1rem;
     text-align: center;
