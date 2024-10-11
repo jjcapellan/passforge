@@ -22,7 +22,7 @@ printTime();
 
 
 async function submitHandler(evt) {
-    evt.preventDefault();    
+    evt.preventDefault();
     if (clicked) return;
     clicked = true;
 
@@ -35,13 +35,21 @@ async function submitHandler(evt) {
     const data = new FormData(form);
     let str = data.get("in");
     let iterations = data.get("iterations");
+    const inclUpper = data.get("ABC");
+    const inclLower = data.get("abc");
+    const inclNum = data.get("123");
+    const inclSym = data.get("sym");
 
     // Generate password (pass)
     let byteArray = await getByteArray(str, iterations);
     let pass = "";
 
     // Build chars array
-    const chars = [...lowercaseArr, ...numbersArr, ...symbolsArr, ...uppercaseArr];
+    const chars = [];
+    if (inclUpper) chars.push(...uppercaseArr);
+    if (inclLower) chars.push(...lowercaseArr);
+    if (inclNum) chars.push(...numbersArr);
+    if (inclSym) chars.push(...symbolsArr);
 
     byteArray.map(v => {
         const num = v.valueOf();
