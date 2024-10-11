@@ -88,6 +88,24 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+input[type="checkbox"]{
+    height: auto;
+}
+
+fieldset {
+    text-align: center;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    margin-bottom: 1rem;
+}
+
+legend {
+    text-align: left;
+}
+
+label{
+    margin-right: 1rem;
+}
+
 #info {
     margin-bottom: 1rem;
     text-align: center;
