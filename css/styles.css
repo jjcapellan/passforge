@@ -44,7 +44,7 @@ form {
     max-width: 32rem;
 }
 
-form input {
+input[type="text"], input[type="number"], input[type="submit"]{
     border-color: darkgray;
     border-style: solid;
     border-width: 2px;
@@ -54,7 +54,7 @@ form input {
     padding-left: 1rem;
 }
 
-form input[type="submit"] {
+input[type="submit"] {
     background-color: orange;
     border-color: black;
     color: black;
@@ -64,13 +64,13 @@ form input[type="submit"] {
     transition: all 0.5s;
 }
 
-form input[type="submit"]:hover {
+input[type="submit"]:hover {
     background-color: black;
     border-color: orange;
     color: white;
 }
 
-form input[type="submit"]:active {
+input[type="submit"]:active {
     background-color: white;
     border-color: black;
     color: black;
@@ -81,11 +81,6 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-    -moz-appearance: textfield;
 }
 
 input[type="checkbox"]{
