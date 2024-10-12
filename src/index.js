@@ -30,13 +30,9 @@ printTime();
 
 async function submitHandler(evt) {
     evt.preventDefault();
+
     if (clicked) return;
     clicked = true;
-
-    // Reset password span
-    spOut.innerText = "";
-    spOut.style.color = "grey";
-    spInfo.innerText = "Progress:";
 
     // Get form data
     const data = new FormData(form);
@@ -47,6 +43,19 @@ async function submitHandler(evt) {
     const inclNum = data.get("123");
     const inclSym = data.get("sym");
     const passLength = data.get("len");
+
+    // If not included options checked
+    if (String(inclLower + inclNum + inclSym + inclUpper).length == 1) {
+        spOut.innerText = "Select some include option";
+        console.log("Selected");
+        clicked = false;
+        return;
+    }
+
+    // Reset password span
+    spOut.innerText = "";
+    spOut.style.color = "grey";
+    spInfo.innerText = "Progress:";
 
     // Generate password (pass)
     let byteArray = await getByteArray(str, iterations);
