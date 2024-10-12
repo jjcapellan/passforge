@@ -115,11 +115,18 @@ label{
 
 #out {
     color: grey;
+    cursor: pointer;
     font-family: 'Courier New', Courier, monospace;
     font-size: 2rem;
     padding: 1rem;
     text-align: center;
-    transition: all 0.8s;
+    transition: all 0.4s;
+}
+
+#out:active {
+    background-color: orange;
+    border-style: dotted;
+    color: black;
 }
 
 @media (max-width: 500px) {

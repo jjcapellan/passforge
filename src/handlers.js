@@ -25,6 +25,7 @@ function setHandlers() {
     btMinus.addEventListener("click", minusHandler, false);
     btPlus.addEventListener("click", plusHandler, false);
     rgLength.addEventListener("change", rgLengthHandler, false);
+    spOut.addEventListener("click", spOutHandler, false);
 }
 
 async function submitHandler(evt) {
@@ -61,7 +62,7 @@ async function submitHandler(evt) {
     // Render password
     spOut.innerText = pass;
     spOut.style.color = "black";
-    spInfo.innerText = "New password:";
+    spInfo.innerText = "Click on to copy:";
 
     clicked = false;
 }
@@ -97,6 +98,13 @@ function plusHandler(evt) {
 
 function rgLengthHandler(evt) {
     lbRange.innerText = `Length(${rgLength.value})`;
+}
+
+function spOutHandler(evt) {
+    const txt = spOut.innerText;
+    if(txt == "") return;
+    navigator.clipboard.writeText(txt);
+    spInfo.innerText = "Password copied";
 }
 
 async function getIterationTime() {
