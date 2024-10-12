@@ -3,6 +3,13 @@
     --safe-left: env(safe-area-inset-left, 20px);
     --safe-right: env(safe-area-inset-right, 20px);
     --safe-top: env(safe-area-inset-top, 20px);
+    --color-bg-body: #efefef;
+    --color-bg-button1: #ffa500;
+    --color-bg-light-button1: #ffc500;
+    --color-bg-button2: #cdcdcd;
+    --color-bg-light-button2: #dfdfdf;
+    --color-border-button2: #909090;
+    --color-accent: #323232;
 }
 
 * {
@@ -14,6 +21,7 @@
 }
 
 html {
+    background-color: var(--color-bg-body);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
 }
@@ -44,7 +52,9 @@ form {
     max-width: 32rem;
 }
 
-input[type="text"], input[type="number"], input[type="submit"]{
+input[type="text"],
+input[type="number"],
+input[type="submit"] {
     border-color: darkgray;
     border-style: solid;
     border-width: 2px;
@@ -55,8 +65,8 @@ input[type="text"], input[type="number"], input[type="submit"]{
 }
 
 input[type="submit"] {
-    background-color: orange;
-    border-color: black;
+    background-color: var(--color-bg-button1);
+    border-style: none;
     color: black;
     font-weight: bold;
     height: unset;
@@ -65,9 +75,9 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: black;
-    border-color: orange;
-    color: white;
+    background-color: var(--color-bg-light-button1);
+    color: black;
+    cursor: pointer;
 }
 
 input[type="submit"]:active {
@@ -83,12 +93,19 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-input[type="checkbox"]{
+input[type="checkbox"] {
+    accent-color: var(--color-accent);
     height: auto;
+}
+
+input[type="range"] {
+    accent-color: var(--color-accent);
+    margin: 0 0.5rem 0 0.5rem;
 }
 
 fieldset {
     text-align: center;
+    border-width: 1px;
     padding: 0.5rem 1rem 0.5rem 1rem;
     margin-bottom: 1rem;
 }
@@ -97,7 +114,7 @@ legend {
     text-align: left;
 }
 
-label{
+label {
     margin-right: 1rem;
 }
 
@@ -106,6 +123,13 @@ label{
     width: 2rem;
     font-size: 1rem;
     font-weight: bold;
+    background-color:var(--color-bg-button2);
+    border-style: solid;
+    border-color: var(--color-border-button2);
+}
+
+.rangebt:hover {
+    background-color: var(--color-bg-light-button2);
 }
 
 #info {
@@ -133,12 +157,14 @@ label{
     section {
         padding: 1rem;
     }
+
     form {
         width: inherit;
     }
-    #out{
+
+    #out {
         font-size: 1.5rem;
-        word-wrap:break-word;
+        word-wrap: break-word;
         word-break: break-all;
     }
-  }
+}
