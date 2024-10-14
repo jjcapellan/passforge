@@ -132,7 +132,7 @@ label {
     background-color: var(--color-bg-light-button2);
 }
 
-#info {
+.info {
     margin-bottom: 1rem;
     text-align: center;
 }

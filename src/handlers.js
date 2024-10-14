@@ -11,6 +11,16 @@ import {
     tbIt,
 } from "./index.js";
 
+import {
+    centuryDuration,
+    dayDuration,
+    hashPerSecond,
+    hourDuration,
+    minuteDuration,
+    spTime,
+    yearDuration,
+} from "./constants.js";
+
 let clicked = false;
 let iterationTime = 0;
 
@@ -38,14 +48,14 @@ async function submitHandler(evt) {
     const data = new FormData(form);
     let str = data.get("in");
     let iterations = data.get("iterations");
-    const inclUpper = data.get("ABC");
-    const inclLower = data.get("abc");
-    const inclNum = data.get("123");
-    const inclSym = data.get("sym");
+    const inclUpper = data.get("ABC") ? true : false;
+    const inclLower = data.get("abc") ? true : false;
+    const inclNum = data.get("123") ? true : false;
+    const inclSym = data.get("sym") ? true : false;
     const passLength = data.get("len");
 
     // If not included options checked
-    if (String(inclLower + inclNum + inclSym + inclUpper).length == 1) {
+    if (inclLower + inclNum + inclSym + inclUpper == 0) {
         spOut.innerText = "Select some include option";
         clicked = false;
         return;
@@ -55,6 +65,7 @@ async function submitHandler(evt) {
     spOut.innerText = "";
     spOut.style.color = "grey";
     spInfo.innerText = "Progress:";
+    spTime.innerText = "";
 
     // Generate password
     const pass = await genPass(str, iterations, passLength, inclUpper, inclLower, inclNum, inclSym);
@@ -63,6 +74,10 @@ async function submitHandler(evt) {
     spOut.innerText = pass;
     spOut.style.color = "black";
     spInfo.innerText = "Click on to copy:";
+
+    // Render time to crack
+    const msgTime = getTimetoCrack(pass, inclUpper * 26 + inclLower * 26 + inclNum * 10 + inclSym * 33);
+    spTime.innerHTML = msgTime;
 
     clicked = false;
 }
@@ -102,9 +117,34 @@ function rgLengthHandler(evt) {
 
 function spOutHandler(evt) {
     const txt = spOut.innerText;
-    if(txt == "") return;
+    if (txt == "") return;
     navigator.clipboard.writeText(txt);
     spInfo.innerText = "Password copied";
+}
+
+function getTimetoCrack(pass, charsLength) {
+    const combinations = Math.pow(charsLength, pass.length);
+
+    
+
+    let seconds = Math.round(combinations / hashPerSecond);
+    console.log(seconds);
+
+    const msg = "Could be cracked in ";
+
+    return seconds > centuryDuration ?
+        `${msg}centuries` :
+        seconds > yearDuration ?
+            `${msg}${Math.round(seconds / yearDuration)} years` :
+            seconds > dayDuration ?
+                `${msg}${Math.round(seconds / dayDuration)} days` :
+                seconds > hourDuration ?
+                    `${msg}${Math.round(seconds / hourDuration)} hours` :
+                    seconds > minuteDuration ?
+                        `${msg}${Math.round(seconds / minuteDuration)} minutes` :
+                        seconds > 1 ?
+                            `${msg}${Math.round(seconds)} seconds` :
+                            `Could be cracked instantly`;
 }
 
 async function getIterationTime() {
